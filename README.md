@@ -1,4 +1,4 @@
-# todo list
+# todolist
 
 this is a todo list with javascript
 
