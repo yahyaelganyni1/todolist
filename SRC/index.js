@@ -1,4 +1,5 @@
 import './style.css';
+
 const theList = document.querySelector('.the-list');
 
 const listItem = [
