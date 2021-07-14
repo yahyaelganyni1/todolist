@@ -34,7 +34,7 @@ const listElemenet = (description, completed) => {
   text.innerHTML = description;
   const checbox = document.createElement('input');
   checbox.setAttribute('type', 'checkbox');
-  moreIcon.setAttribute('class', 'fas fa-ellipsis-h');
+  moreIcon.setAttribute('class', 'fas fa-ellipsis-v');
   checbox.checked = completed;
   div.appendChild(checbox);
   div.appendChild(text);
