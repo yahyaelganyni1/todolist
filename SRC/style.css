@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .main-div {
@@ -11,19 +12,30 @@
   margin-top: 5em;
 }
 
+.todo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.411);
+  font-size: 1.4em;
+  padding: 0.4em;
+}
+
 .ibput-box {
-  padding: 0.5em 12em 0.5em 1em;
-  font-size: 1.5em;
+  padding: 1em;
+  border: 1px solid rgba(0, 0, 0, 0.411);
+  width: 50%;
+  font-size: 1em;
 }
 
 .main-div h2 {
-  font-size: 2em;
+  margin-right: 9em;
 }
 
 ul {
-  display: flex;
-  flex-direction: column;
-  padding: 2em;
+  width: 50%;
 }
 
 ul li {
@@ -37,6 +49,14 @@ ul li {
 
 ul li p {
   padding: 0 9em 0 1em;
+}
+
+ul li i {
+  color: rgb(80, 80, 80);
+}
+
+ul li i:hover {
+  cursor: all-scroll;
 }
 
 ul li input {
@@ -53,10 +73,9 @@ ul li div {
   font-size: 2em;
   letter-spacing: 4px;
   font-weight: 400 !important;
-  background-color: rgb(223, 223, 223);
-  color: #000;
-  padding: 1em 4.2em;
-  width: max-content;
+  color: rgb(110, 109, 109);
+  padding: 0.4em;
+  width: 50%;
   cursor: pointer;
   transition: all 0.3s 0s ease-in-out;
 }
