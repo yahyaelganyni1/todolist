@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import './style.css';
+
 const theList = document.querySelector('.the-list');
-const inpotBox = document.querySelector('.ibput-box');
+
 const listItem = [
   {
     description: 'do stuff 1',
@@ -27,19 +28,18 @@ const listItem = [
 
 // creat list element
 
-const listElemenet = (description, completed, index) => {
+const listElemenet = (description, completed, id) => {
   const li = document.createElement('li');
   const text = document.createElement('p');
   text.innerHTML = description;
   const checbox = document.createElement('input');
   checbox.setAttribute('type', 'checkbox');
+  checbox.checked = completed;
   li.appendChild(checbox);
   li.appendChild(text);
   theList.appendChild(li);
 };
 
 listItem.forEach((item) => {
-  listElemenet(item.description);
+  listElemenet(item.description, item.completed);
 });
-
-console.log(listItem[0]);
