@@ -1,10 +1,9 @@
 import './style.css';
-
 const theList = document.querySelector('.the-list');
 
 const listItem = [
   {
-    description: 'do stuff 1',
+    description: 'do stuff 11',
     completed: false,
     index: 0,
   },
@@ -30,12 +29,17 @@ const listItem = [
 const listElemenet = (description, completed) => {
   const li = document.createElement('li');
   const text = document.createElement('p');
+  const moreIcon = document.createElement('i');
+  const div = document.createElement('div');
   text.innerHTML = description;
   const checbox = document.createElement('input');
   checbox.setAttribute('type', 'checkbox');
+  moreIcon.setAttribute('class', 'fas fa-ellipsis-h');
   checbox.checked = completed;
-  li.appendChild(checbox);
-  li.appendChild(text);
+  div.appendChild(checbox);
+  div.appendChild(text);
+  li.appendChild(div);
+  li.appendChild(moreIcon);
   theList.appendChild(li);
 };
 
