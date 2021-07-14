@@ -1,4 +1,5 @@
 // import _ from 'lodash';
+
 import './style.css';
 
 const theList = document.querySelector('.the-list');
@@ -28,7 +29,7 @@ const listItem = [
 
 // creat list element
 
-const listElemenet = (description, completed, id) => {
+const listElemenet = (description, completed) => {
   const li = document.createElement('li');
   const text = document.createElement('p');
   text.innerHTML = description;
