@@ -1,7 +1,7 @@
 const theList = document.querySelector('.the-list');
 const listItems = [
   {
-    description: 'do stuff 11',
+    description: 'do stuff 1',
     completed: false,
     index: 0,
   },
