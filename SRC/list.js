@@ -24,8 +24,9 @@ const listItems = [
 
 // creat list element
 
-const listElemenet = (description, completed) => {
+const listElemenet = (description, completed, id) => {
   const li = document.createElement('li');
+  li.id = id;
   li.classList.add('list');
   li.setAttribute('draggable', 'true');
   const text = document.createElement('p');
@@ -44,7 +45,7 @@ const listElemenet = (description, completed) => {
 };
 
 listItems.forEach((item) => {
-  listElemenet(item.description, item.completed);
+  listElemenet(item.description, item.completed, item.index);
 });
 
 export { listItems, listElemenet, theList };
