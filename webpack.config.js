@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     index: './src/index.js',
   },
+  mode: 'development',
   devServer: {
     contentBase: './dist',
   },

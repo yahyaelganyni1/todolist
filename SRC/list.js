@@ -1,4 +1,4 @@
-import { mz } from './dragAndDrop';
+import { addActionListner } from './dragAndDrop.js';
 
 const theList = document.querySelector('.the-list');
 
@@ -7,25 +7,25 @@ const listItems = [
     id: 0,
     description: 'do stuff 1',
     completed: false,
-    index: 2,
+    index: 0,
   },
   {
     id: 1,
     description: 'do stuff 2',
-    completed: true,
+    completed: false,
     index: 3,
   },
   {
     id: 2,
     description: 'do stuff 3',
     completed: false,
-    index: 0,
+    index: 1,
   },
   {
     id: 3,
     description: 'do stuff 4',
-    completed: false,
-    index: 1,
+    completed: true,
+    index: 2,
   },
 ];
 
@@ -36,7 +36,9 @@ const renderListElemenet = (description, completed, id) => {
   li.id = id;
   li.classList.add('list');
   li.setAttribute('draggable', 'true');
+  if (completed) li.classList.add('checked');
   const text = document.createElement('p');
+  text.classList.add('text');
   const moreIcon = document.createElement('i');
   const div = document.createElement('div');
   text.innerHTML = description;
@@ -56,35 +58,15 @@ const swap = (firstId, secondId) => {
   const firstObject = listItems.find((ele) => ele.id === Number(firstId));
   const secondObject = listItems.find((ele) => ele.id === Number(secondId));
 
-  console.log('brfore', listItems);
-
   let tempIndex = firstObject.index;
-  console.log(
-    'temp',
-    tempIndex,
-    'findex',
-    firstObject.index,
-    'sindex',
-    secondObject.index
-  );
 
   firstObject.index = secondObject.index;
   secondObject.index = tempIndex;
-  console.log(
-    'temp',
-    tempIndex,
-    'findex',
-    firstObject.index,
-    'sindex',
-    secondObject.index
-  );
 
-  console.log('after', listItems);
   render();
 };
 
 const render = () => {
-  console.log('renderd...');
   theList.innerHTML = '';
   listItems
     .sort((a, b) => a.index - b.index)
@@ -92,10 +74,9 @@ const render = () => {
       renderListElemenet(item.description, item.completed, item.id);
     });
 
-  // addActionListner();
+  addActionListner();
 };
 
-mz();
 render();
 
 export { listItems, renderListElemenet, theList, swap };

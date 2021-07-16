@@ -1,9 +1,12 @@
-import { listItems, listElemenet, theList } from './list';
-const checkbox = document.querySelectorAll('.checkbox');
-const list = document.querySelectorAll('.list');
+// import { listItems, listElemenet, theList } from './list';
+// const checkbox = document.querySelectorAll('.checkbox');
+// const text = document.querySelectorAll('.text');
+// const list = document.querySelectorAll('.list');
 
-checkbox.forEach((element) => {
-  element.addEventListener('change', (e) => {
-    e.target.nextElementSibling.classList.toggle('checked');
-  });
-});
+// checkbox.forEach((box) => {
+//   if (box.checked) {
+//     box.parentElement.classList.add('checked');
+//   } else {
+//     box.parentElement.classList.remove('checked');
+//   }
+// });
