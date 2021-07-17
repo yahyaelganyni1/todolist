@@ -14,14 +14,7 @@ if (localStorage.length < 1) {
 } else {
   listItems = JSON.parse(localStorage.getItem('list'));
 }
-// clearBtn.addEventListener('click', (e) => {
-//   listItems = listItems.filter((item) => {
-//     item.completed === false;
-//   });
-//   console.log(listItems);
-//   localStorage.setItem('list', JSON.stringify(listItems));
-// });
-// creat list element
+
 inputBox.addEventListener('keypress', (e) => {
   if (e.key === 'Enter' && inputBox.value.length > 0) {
     const theListObject = new List(inputBox.value, false, listItems.length + 1);

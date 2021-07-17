@@ -18,6 +18,13 @@ const addChecklocal = () => {
       }
       localStorage.setItem('list', JSON.stringify(listItems));
     });
+    clearBtn.addEventListener('click', (e) => {
+      listItems.filter((item) => {
+        item.completed === false;
+      });
+      console.log(listItems);
+      localStorage.setItem('list', JSON.stringify(listItems));
+    });
   });
 };
 const addCheck = () => {
