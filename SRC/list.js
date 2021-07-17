@@ -1,10 +1,9 @@
-/* eslint-disable */
 import { addActionListner } from './dragAndDrop.js';
 import { addCheck, addChecklocal } from './check.js';
 
 const theList = document.querySelector('.the-list');
 
-const listItems = [];
+let listItems = [];
 
 if (localStorage.length < 1) {
   listItems = [
@@ -62,7 +61,7 @@ const renderListElemenet = (description, completed, id) => {
   theList.appendChild(li);
 };
 
-const localStorageList = JSON.parse(localStorage.getItem('list'));
+let localStorageList = JSON.parse(localStorage.getItem('list')); //retrieve the object
 
 const localRender = () => {
   theList.innerHTML = '';
@@ -99,6 +98,7 @@ const render = () => {
 
 const swapLocal = (firstId, secondId) => {
   localStorageList = JSON.parse(localStorage.getItem('list'));
+  debugger;
   const firstObject = localStorageList.find(
     (ele) => ele.id === Number(firstId)
   );
@@ -108,11 +108,12 @@ const swapLocal = (firstId, secondId) => {
 
   const tempIndex = firstObject.index;
 
+  debugger;
   console.log(listItems);
 
-  const tempId = listItems[tempIndex].id;
-  const tempDesc = listItems[tempIndex].description;
-  const tempCompl = listItems[tempIndex].completed;
+  let tempId = listItems[tempIndex].id;
+  let tempDesc = listItems[tempIndex].description;
+  let tempCompl = listItems[tempIndex].completed;
   // let tempInd = listItems[firstId].index;
 
   listItems[tempIndex].id = listItems[secondObject.index].id;
