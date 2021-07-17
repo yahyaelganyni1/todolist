@@ -95,14 +95,14 @@ const localRender = () => {
       localRender();
     });
   });
-  //   clearBtn.addEventListener('click', (e) => {
-  //     listItems = listItems.filter((item) => {
-  //       console.log(item.completed);
-  //       item.completed === false;
-  //     });
-  //     console.log(listItems);
-  //     localStorage.setItem('list', JSON.stringify(listItems));
-  //   });
+  clearBtn.addEventListener('click', (e) => {
+    listItems = listItems.filter((item) => {
+      console.log(item.completed);
+      item.completed === false;
+    });
+    console.log(listItems);
+    localStorage.setItem('list', JSON.stringify(listItems));
+  });
 };
 const swapLocal = (firstId, secondId) => {
   localStorageList = JSON.parse(localStorage.getItem('list'));
