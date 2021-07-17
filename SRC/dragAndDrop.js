@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { swap, listItems, swapLocal } from './list.js';
 // ...............................
 export const addActionListner = () => {
@@ -15,11 +13,12 @@ export const addActionListner = () => {
       e.dataTransfer.effectAllowed = 'move';
       const fristId = e.dataTransfer.getData('id');
       const secondId = element.id;
-      // if (localStorage.length > 0) {
-      //   swapLocal(fristId, secondId);
-      // } else {
-      swap(fristId, secondId);
-      // }
+      if (localStorage.length > 0) {
+        swapLocal(fristId, secondId);
+      } else {
+        swap(fristId, secondId);
+      }
+      localStorage.setItem('list', JSON.stringify(listItems));
     });
     element.addEventListener('dragend', () => {
       element.classList.remove('ondrag');

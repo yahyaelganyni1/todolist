@@ -1,7 +1,5 @@
-/* eslint-disable */
-
 import { addActionListner } from './dragAndDrop.js';
-import { addCheck } from './check.js';
+import { addCheck, addChecklocal } from './check.js';
 
 const theList = document.querySelector('.the-list');
 const listItems = [
@@ -30,8 +28,8 @@ const listItems = [
     index: 3,
   },
 ];
-// creat list element
 
+// creat list element
 const renderListElemenet = (description, completed, id) => {
   const li = document.createElement('li');
   li.id = id;
@@ -55,7 +53,7 @@ const renderListElemenet = (description, completed, id) => {
   theList.appendChild(li);
 };
 
-// var localStorageList = JSON.parse(localStorage.getItem('list')); //retrieve the object
+let localStorageList = JSON.parse(localStorage.getItem('list')); //retrieve the object
 
 const localRender = () => {
   theList.innerHTML = '';
@@ -66,7 +64,11 @@ const localRender = () => {
     });
 
   addActionListner();
-  addCheck();
+  if (localStorage > 0) {
+    addChecklocal();
+  } else {
+    addCheck();
+  }
 };
 
 const render = () => {
@@ -78,7 +80,12 @@ const render = () => {
     });
 
   addActionListner();
-  addCheck();
+  addActionListner();
+  if (localStorage > 0) {
+    addChecklocal();
+  } else {
+    addCheck();
+  }
 };
 
 const swapLocal = (firstId, secondId) => {
@@ -102,22 +109,21 @@ const swapLocal = (firstId, secondId) => {
 const swap = (firstId, secondId) => {
   const firstObject = listItems.find((ele) => ele.id === Number(firstId));
   const secondObject = listItems.find((ele) => ele.id === Number(secondId));
-
+  console.log(firstObject);
   const tempIndex = firstObject.index;
-  // console.log(firstObject);
   firstObject.index = secondObject.index;
   secondObject.index = tempIndex;
-  // if (localStorage.length > 0) {
-  //   localRender();
-  // } else {
-  render();
-  // }
+  if (localStorage.length > 0) {
+    localRender();
+  } else {
+    render();
+  }
 };
 
-// if (localStorage.length > 0) {
-//   localRender();
-// } else {
-render();
-// }
+if (localStorage.length > 0) {
+  localRender();
+} else {
+  render();
+}
 
-export { listItems, swap, swapLocal };
+export { listItems, swap, swapLocal, localStorageList };
