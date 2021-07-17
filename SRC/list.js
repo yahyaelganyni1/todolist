@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { addActionListner } from './dragAndDrop.js';
 
 const theList = document.querySelector('.the-list');
