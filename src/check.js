@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 import { listItems, localStorageList } from './list.js';
 // ...............................
-export const addChecklocal = () => {
+const addChecklocal = () => {
   const listElemenets = document.querySelectorAll('.list');
   listElemenets.forEach((element) => {
     const checked = element.children[0].children[0];
@@ -17,7 +19,7 @@ export const addChecklocal = () => {
     });
   });
 };
-export const addCheck = () => {
+const addCheck = () => {
   const listElemenets = document.querySelectorAll('.list');
   listElemenets.forEach((element) => {
     const checked = element.children[0].children[0];
@@ -32,3 +34,5 @@ export const addCheck = () => {
     });
   });
 };
+
+export { addCheck, addChecklocal };

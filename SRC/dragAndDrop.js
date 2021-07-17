@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { swap, listItems, swapLocal } from './list.js';
 // ...............................
 export const addActionListner = () => {
