@@ -100,7 +100,6 @@ const render = () => {
 
 const swapLocal = (firstId, secondId) => {
   localStorageList = JSON.parse(localStorage.getItem('list'));
-  debugger;
   const firstObject = localStorageList.find(
     (ele) => ele.id === Number(firstId)
   );
@@ -110,7 +109,6 @@ const swapLocal = (firstId, secondId) => {
 
   const tempIndex = firstObject.index;
 
-  debugger;
   console.log(listItems);
 
   let tempId = listItems[tempIndex].id;
