@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 import { addActionListner } from './dragAndDrop.js';
+import { addCheck } from './check.js';
 
 const theList = document.querySelector('.the-list');
-
 const listItems = [
   {
     id: 0,
@@ -15,22 +15,21 @@ const listItems = [
     id: 1,
     description: 'do stuff 2',
     completed: false,
-    index: 3,
+    index: 1,
   },
   {
     id: 2,
     description: 'do stuff 3',
     completed: false,
-    index: 1,
+    index: 2,
   },
   {
     id: 3,
     description: 'do stuff 4',
     completed: false,
-    index: 2,
+    index: 3,
   },
 ];
-
 // creat list element
 
 const renderListElemenet = (description, completed, id) => {
@@ -56,6 +55,20 @@ const renderListElemenet = (description, completed, id) => {
   theList.appendChild(li);
 };
 
+// var localStorageList = JSON.parse(localStorage.getItem('list')); //retrieve the object
+
+const localRender = () => {
+  theList.innerHTML = '';
+  localStorageList
+    .sort((a, b) => a.index - b.index)
+    .forEach((item) => {
+      renderListElemenet(item.description, item.completed, item.id);
+    });
+
+  addActionListner();
+  addCheck();
+};
+
 const render = () => {
   theList.innerHTML = '';
   listItems
@@ -65,20 +78,46 @@ const render = () => {
     });
 
   addActionListner();
+  addCheck();
 };
 
-const swap = (firstId, secondId) => {
-  const firstObject = listItems.find((ele) => ele.id === Number(firstId));
-  const secondObject = listItems.find((ele) => ele.id === Number(secondId));
+const swapLocal = (firstId, secondId) => {
+  const firstObject = localStorageList.find(
+    (ele) => ele.id === Number(firstId)
+  );
+  const secondObject = localStorageList.find(
+    (ele) => ele.id === Number(secondId)
+  );
 
   const tempIndex = firstObject.index;
 
   firstObject.index = secondObject.index;
   secondObject.index = tempIndex;
+  if (localStorage.length > 0) {
+    localRender();
+  } else {
+    render();
+  }
+};
+const swap = (firstId, secondId) => {
+  const firstObject = listItems.find((ele) => ele.id === Number(firstId));
+  const secondObject = listItems.find((ele) => ele.id === Number(secondId));
 
+  const tempIndex = firstObject.index;
+  // console.log(firstObject);
+  firstObject.index = secondObject.index;
+  secondObject.index = tempIndex;
+  // if (localStorage.length > 0) {
+  //   localRender();
+  // } else {
   render();
+  // }
 };
 
+// if (localStorage.length > 0) {
+//   localRender();
+// } else {
 render();
+// }
 
-export { listItems, swap };
+export { listItems, swap, swapLocal };

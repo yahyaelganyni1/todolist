@@ -1,2 +1,2 @@
-import './style.css';
 import './list.js';
+import './style.css';

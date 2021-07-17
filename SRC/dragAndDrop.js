@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { listItems, swap } from './list.js';
+import { swap, listItems, swapLocal } from './list.js';
 // ...............................
 export const addActionListner = () => {
   const listElemenets = document.querySelectorAll('.list');
@@ -15,23 +15,17 @@ export const addActionListner = () => {
       e.dataTransfer.effectAllowed = 'move';
       const fristId = e.dataTransfer.getData('id');
       const secondId = element.id;
+      // if (localStorage.length > 0) {
+      //   swapLocal(fristId, secondId);
+      // } else {
       swap(fristId, secondId);
+      // }
     });
     element.addEventListener('dragend', () => {
       element.classList.remove('ondrag');
     });
     element.addEventListener('dragover', (e) => {
       e.preventDefault();
-    });
-    const checked = element.children[0].children[0];
-    checked.addEventListener('change', () => {
-      const arrObject = listItems.find((ele) => ele.id === Number(element.id));
-      arrObject.completed = !arrObject.completed;
-      if (arrObject.completed) {
-        element.classList.add('checked');
-      } else {
-        element.classList.remove('checked');
-      }
     });
   });
 };
