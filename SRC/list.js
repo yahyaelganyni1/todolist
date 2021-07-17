@@ -96,7 +96,7 @@ const localRender = () => {
     });
   });
   clearBtn.addEventListener('click', (e) => {
-    listItems = listItems.filter((item) => {
+    listItems.filter((item) => {
       console.log(item.completed);
       item.completed === false;
     });
