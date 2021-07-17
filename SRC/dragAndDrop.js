@@ -1,7 +1,6 @@
-import { listItems, swap } from './list';
+import { listItems, swap } from './list.js';
 // ...............................
 export const addActionListner = () => {
-  const checkbox = document.querySelectorAll('.checkbox');
   const listElemenets = document.querySelectorAll('.list');
   listElemenets.forEach((element) => {
     element.addEventListener('dragstart', (e) => {

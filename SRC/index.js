@@ -1,4 +1,4 @@
 import './style.css';
-import './list';
-import './dragAndDrop';
-import './checked';
+import './list.js';
+import './dragAndDrop.js';
+import './checked.js';

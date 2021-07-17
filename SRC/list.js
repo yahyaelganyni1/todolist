@@ -24,7 +24,7 @@ const listItems = [
   {
     id: 3,
     description: 'do stuff 4',
-    completed: true,
+    completed: false,
     index: 2,
   },
 ];
@@ -79,4 +79,4 @@ const swap = (firstId, secondId) => {
 
 render();
 
-export { listItems, renderListElemenet, theList, swap };
+export { listItems, swap };
