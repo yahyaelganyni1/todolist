@@ -1,8 +1,8 @@
-import { listItems, listElemenet, theList, swap } from './list';
+import { listItems, swap } from './list';
 // ...............................
 export const addActionListner = () => {
   let checkbox = document.querySelectorAll('.checkbox');
-  let listElemenets = document.querySelectorAll('.list');
+  const listElemenets = document.querySelectorAll('.list');
   console.log(checkbox);
   listElemenets.forEach((element) => {
     element.addEventListener('dragstart', (e) => {
@@ -13,8 +13,8 @@ export const addActionListner = () => {
     element.addEventListener('drop', (e) => {
       e.preventDefault();
       e.dataTransfer.effectAllowed = 'move';
-      let fristId = e.dataTransfer.getData('id');
-      let secondId = element.id;
+      const fristId = e.dataTransfer.getData('id');
+      const secondId = element.id;
       swap(fristId, secondId);
     });
     element.addEventListener('dragend', () => {
@@ -23,8 +23,8 @@ export const addActionListner = () => {
     element.addEventListener('dragover', (e) => {
       e.preventDefault();
     });
-    let checked = element.children[0].children[0];
-    checked.addEventListener('change', (e) => {
+    const checked = element.children[0].children[0];
+    checked.addEventListener('change', () => {
       const arrObject = listItems.find((ele) => ele.id === Number(element.id));
       arrObject.completed = !arrObject.completed;
       if (arrObject.completed) {
