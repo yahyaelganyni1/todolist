@@ -54,18 +54,6 @@ const renderListElemenet = (description, completed, id) => {
   theList.appendChild(li);
 };
 
-const swap = (firstId, secondId) => {
-  const firstObject = listItems.find((ele) => ele.id === Number(firstId));
-  const secondObject = listItems.find((ele) => ele.id === Number(secondId));
-
-  const tempIndex = firstObject.index;
-
-  firstObject.index = secondObject.index;
-  secondObject.index = tempIndex;
-
-  render();
-};
-
 const render = () => {
   theList.innerHTML = '';
   listItems
@@ -75,6 +63,18 @@ const render = () => {
     });
 
   addActionListner();
+};
+
+const swap = (firstId, secondId) => {
+  const firstObject = listItems.find((ele) => ele.id === Number(firstId));
+  const secondObject = listItems.find((ele) => ele.id === Number(secondId));
+
+  let tempIndex = firstObject.index;
+
+  firstObject.index = secondObject.index;
+  secondObject.index = tempIndex;
+
+  render();
 };
 
 render();
