@@ -1,5 +1,5 @@
 import { addActionListner } from './dragAndDrop.js';
-import { addCheck, addChecklocal } from './check.js';
+import { addCheck } from './check.js';
 
 const theList = document.querySelector('.the-list');
 const listItems = [
@@ -53,23 +53,9 @@ const renderListElemenet = (description, completed, id) => {
   theList.appendChild(li);
 };
 
+localStorage.setItem('list', JSON.stringify(theList));
+
 let localStorageList = JSON.parse(localStorage.getItem('list')); //retrieve the object
-
-const localRender = () => {
-  theList.innerHTML = '';
-  localStorageList
-    .sort((a, b) => a.index - b.index)
-    .forEach((item) => {
-      renderListElemenet(item.description, item.completed, item.id);
-    });
-
-  addActionListner();
-  if (localStorage > 0) {
-    addChecklocal();
-  } else {
-    addCheck();
-  }
-};
 
 const render = () => {
   theList.innerHTML = '';
@@ -78,52 +64,23 @@ const render = () => {
     .forEach((item) => {
       renderListElemenet(item.description, item.completed, item.id);
     });
+  localStorageList = JSON.parse(localStorage.getItem('list'));
 
   addActionListner();
-  addActionListner();
-  if (localStorage > 0) {
-    addChecklocal();
-  } else {
-    addCheck();
-  }
+
+  addCheck();
 };
 
-const swapLocal = (firstId, secondId) => {
-  const firstObject = localStorageList.find(
-    (ele) => ele.id === Number(firstId)
-  );
-  const secondObject = localStorageList.find(
-    (ele) => ele.id === Number(secondId)
-  );
-
-  const tempIndex = firstObject.index;
-
-  firstObject.index = secondObject.index;
-  secondObject.index = tempIndex;
-  if (localStorage.length > 0) {
-    localRender();
-  } else {
-    render();
-  }
-};
 const swap = (firstId, secondId) => {
   const firstObject = listItems.find((ele) => ele.id === Number(firstId));
   const secondObject = listItems.find((ele) => ele.id === Number(secondId));
-  console.log(firstObject);
   const tempIndex = firstObject.index;
   firstObject.index = secondObject.index;
   secondObject.index = tempIndex;
-  if (localStorage.length > 0) {
-    localRender();
-  } else {
-    render();
-  }
+
+  render();
 };
 
-if (localStorage.length > 0) {
-  localRender();
-} else {
-  render();
-}
+render();
 
-export { listItems, swap, swapLocal, localStorageList };
+export { listItems, swap };
