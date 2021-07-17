@@ -13,9 +13,16 @@ export const addActionListner = () => {
       e.dataTransfer.effectAllowed = 'move';
       const fristId = e.dataTransfer.getData('id');
       const secondId = element.id;
-
-      swap(fristId, secondId);
-      // localStorage.setItem('list', JSON.stringify(listItems));
+      localStorage.setItem('list', JSON.stringify(listItems));
+      // debugger;
+      if (localStorage.length > 0) {
+        // debugger;
+        swapLocal(fristId, secondId);
+      } else {
+        // debugger;
+        swap(fristId, secondId);
+      }
+      localStorage.setItem('list', JSON.stringify(listItems));
     });
     element.addEventListener('dragend', () => {
       element.classList.remove('ondrag');
