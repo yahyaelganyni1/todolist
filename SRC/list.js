@@ -15,26 +15,39 @@ if (localStorage.length < 1) {
   listItems = JSON.parse(localStorage.getItem('list'));
 }
 
+// clearBtn.addEventListener('click', (e) => {
+//   listItems = listItems.filter((item) => item.completed === false);
+//   console.log(listItems);
+//   listItems.forEach((item, index) => item.index = index + 1);
+//   localStorage.setItem('list', JSON.stringify(listItems));
+//   localStorageList = JSON.parse(localStorage.getItem('list'));
+//   localRender();
+// });
+
+// creat list element
 inputBox.addEventListener('keypress', (e) => {
   if (e.key === 'Enter' && inputBox.value.length > 0) {
     const theListObject = new List(inputBox.value, false, listItems.length + 1);
     listItems.push(theListObject);
     theListObject.renderListElemenet();
     localStorage.setItem('list', JSON.stringify(listItems));
-    addActionListner();
-    icons = document.querySelectorAll('li i');
-    addCheck();
-    icons.forEach((icon) => {
-      icon.addEventListener('click', (e) => {
-        listItems.splice(Array.prototype.indexOf.call(icons, e.target), 1);
-        console.log(listItems);
-        console.log(Array.prototype.indexOf.call(icons, e.target));
-        localStorage.setItem('list', JSON.stringify(listItems));
-        localStorageList = JSON.parse(localStorage.getItem('list'));
-        e.stopImmediatePropagation();
-        localRender();
-      });
-    });
+    localStorageList = JSON.parse(localStorage.getItem('list'));
+    // addActionListner();
+    // icons = document.querySelectorAll('li i');
+    // // addCheck();
+    // icons.forEach((icon) => {
+    //   icon.addEventListener('click', (e) => {
+    //     listItems.splice(Array.prototype.indexOf.call(icons, e.target), 1);
+    //     console.log(listItems);
+    //     console.log(Array.prototype.indexOf.call(icons, e.target));
+    //     listItems.forEach((item, index) => item.index = index + 1);
+    //     localStorage.setItem('list', JSON.stringify(listItems));
+    //     localStorageList = JSON.parse(localStorage.getItem('list'));
+    //     e.stopImmediatePropagation();
+    //     // localRender();
+    //   });
+    // });
+    localRender();
   }
 });
 
@@ -83,19 +96,22 @@ const localRender = () => {
       listItems.splice(Array.prototype.indexOf.call(icons, e.target), 1);
       console.log(listItems);
       console.log(Array.prototype.indexOf.call(icons, e.target));
+      listItems.forEach((item, index) => (item.index = index + 1));
       localStorage.setItem('list', JSON.stringify(listItems));
       localStorageList = JSON.parse(localStorage.getItem('list'));
       localRender();
     });
   });
   clearBtn.addEventListener('click', (e) => {
-    listItems.filter((item) => {
-      item.completed === false;
-    });
-
+    listItems = listItems.filter((item) => item.completed === false);
+    console.log(listItems);
+    listItems.forEach((item, index) => (item.index = index + 1));
     localStorage.setItem('list', JSON.stringify(listItems));
+    localStorageList = JSON.parse(localStorage.getItem('list'));
+    localRender();
   });
 };
+
 const swapLocal = (firstId, secondId) => {
   localStorageList = JSON.parse(localStorage.getItem('list'));
   const firstObject = localStorageList.find(
@@ -104,6 +120,9 @@ const swapLocal = (firstId, secondId) => {
   const secondObject = localStorageList.find(
     (ele) => ele.id === Number(secondId)
   );
+
+  console.log(firstId);
+  console.log(secondId);
   firstId = firstId - 1;
   secondId = secondId - 1;
 
