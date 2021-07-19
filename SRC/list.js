@@ -1,4 +1,3 @@
-
 /* eslint-disable */
 
 import { addActionListner } from './dragAndDrop.js';
@@ -107,7 +106,6 @@ const localRender = () => {
   });
   clearBtn.addEventListener('click', (e) => {
     listItems = listItems.filter((item) => item.completed === false);
-    console.log(listItems);
     listItems.forEach((item, index) => (item.index = index + 1));
     localStorage.setItem('list', JSON.stringify(listItems));
     localStorageList = JSON.parse(localStorage.getItem('list'));
@@ -124,20 +122,15 @@ const swapLocal = (firstId, secondId) => {
     (ele) => ele.id === Number(secondId)
   );
 
-
   const tempIndex = firstObject.index;
-
-  console.log(listItems);
 
   let tempId = listItems[tempIndex].id;
   let tempDesc = listItems[tempIndex].description;
   let tempCompl = listItems[tempIndex].completed;
-  // let tempInd = listItems[firstId].index;
 
   listItems[tempIndex].id = listItems[secondObject.index].id;
   listItems[tempIndex].description = listItems[secondObject.index].description;
   listItems[tempIndex].completed = listItems[secondObject.index].completed;
-  // listItems[firstId].index = listItems[secondId].index;
 
   let tempdescription = JSON.parse(
     JSON.stringify(listItems[firstId].description)
