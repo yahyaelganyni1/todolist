@@ -51,10 +51,6 @@ ul li i {
   color: rgb(80, 80, 80);
 }
 
-ul li i:hover {
-  cursor: grab;
-}
-
 ul li input {
   width: 2em;
   height: 2em;

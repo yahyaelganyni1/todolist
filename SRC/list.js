@@ -1,45 +1,59 @@
+
 /* eslint-disable */
 
 import { addActionListner } from './dragAndDrop.js';
+import { List } from './addNewList';
 import { addCheck, addChecklocal } from './check.js';
-
 const theList = document.querySelector('.the-list');
+const inputBox = document.querySelector('.input-box');
+let icons = document.querySelectorAll('li i');
+let clearBtn = document.querySelector('.clear-btn');
 
 let listItems = [];
 
 if (localStorage.length < 1) {
-  listItems = [
-    {
-      id: 0,
-      description: 'do stuff 1',
-      completed: false,
-      index: 0,
-    },
-    {
-      id: 1,
-      description: 'do stuff 2',
-      completed: false,
-      index: 1,
-    },
-    {
-      id: 2,
-      description: 'do stuff 3',
-      completed: false,
-      index: 2,
-    },
-    {
-      id: 3,
-      description: 'do stuff 4',
-      completed: false,
-      index: 3,
-    },
-  ];
+  listItems = [];
   localStorage.setItem('list', JSON.stringify(listItems));
 } else {
   listItems = JSON.parse(localStorage.getItem('list'));
 }
 
+// clearBtn.addEventListener('click', (e) => {
+//   listItems = listItems.filter((item) => item.completed === false);
+//   console.log(listItems);
+//   listItems.forEach((item, index) => item.index = index + 1);
+//   localStorage.setItem('list', JSON.stringify(listItems));
+//   localStorageList = JSON.parse(localStorage.getItem('list'));
+//   localRender();
+// });
+
 // creat list element
+inputBox.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter' && inputBox.value.length > 0) {
+    const theListObject = new List(inputBox.value, false, listItems.length + 1);
+    listItems.push(theListObject);
+    theListObject.renderListElemenet();
+    localStorage.setItem('list', JSON.stringify(listItems));
+    localStorageList = JSON.parse(localStorage.getItem('list'));
+    // addActionListner();
+    // icons = document.querySelectorAll('li i');
+    // // addCheck();
+    // icons.forEach((icon) => {
+    //   icon.addEventListener('click', (e) => {
+    //     listItems.splice(Array.prototype.indexOf.call(icons, e.target), 1);
+    //     console.log(listItems);
+    //     console.log(Array.prototype.indexOf.call(icons, e.target));
+    //     listItems.forEach((item, index) => item.index = index + 1);
+    //     localStorage.setItem('list', JSON.stringify(listItems));
+    //     localStorageList = JSON.parse(localStorage.getItem('list'));
+    //     e.stopImmediatePropagation();
+    //     // localRender();
+    //   });
+    // });
+    localRender();
+  }
+});
+
 const renderListElemenet = (description, completed, id) => {
   const li = document.createElement('li');
   li.id = id;
@@ -48,13 +62,18 @@ const renderListElemenet = (description, completed, id) => {
   if (completed) li.classList.add('checked');
   const text = document.createElement('p');
   text.classList.add('text');
+  text.setAttribute('contenteditable', true);
+  text.addEventListener('focusout', (e) => {
+    listItems[id - 1].description = text.innerHTML;
+    localStorage.setItem('list', JSON.stringify(listItems));
+  });
   const moreIcon = document.createElement('i');
   const div = document.createElement('div');
   text.innerHTML = description;
   const checbox = document.createElement('input');
   checbox.setAttribute('type', 'checkbox');
   checbox.classList.add('checkbox');
-  moreIcon.setAttribute('class', 'fas fa-ellipsis-v');
+  moreIcon.setAttribute('class', 'fas fa-trash');
   checbox.checked = completed;
   div.appendChild(checbox);
   div.appendChild(text);
@@ -70,32 +89,30 @@ const localRender = () => {
   localStorageList
     .sort((a, b) => a.index - b.index)
     .forEach((item) => {
-      renderListElemenet(item.description, item.completed, item.id);
+      renderListElemenet(item.description, item.completed, item.index);
     });
-
+  icons = document.querySelectorAll('li i');
   addActionListner();
-  if (localStorage > 0) {
-    addChecklocal();
-  } else {
-    addCheck();
-  }
-};
-
-const render = () => {
-  theList.innerHTML = '';
-  listItems
-    .sort((a, b) => a.index - b.index)
-    .forEach((item) => {
-      renderListElemenet(item.description, item.completed, item.id);
+  addCheck();
+  icons.forEach((icon) => {
+    icon.addEventListener('click', (e) => {
+      listItems.splice(Array.prototype.indexOf.call(icons, e.target), 1);
+      console.log(listItems);
+      console.log(Array.prototype.indexOf.call(icons, e.target));
+      listItems.forEach((item, index) => (item.index = index + 1));
+      localStorage.setItem('list', JSON.stringify(listItems));
+      localStorageList = JSON.parse(localStorage.getItem('list'));
+      localRender();
     });
-
-  addActionListner();
-  addActionListner();
-  if (localStorage > 0) {
-    addChecklocal();
-  } else {
-    addCheck();
-  }
+  });
+  clearBtn.addEventListener('click', (e) => {
+    listItems = listItems.filter((item) => item.completed === false);
+    console.log(listItems);
+    listItems.forEach((item, index) => (item.index = index + 1));
+    localStorage.setItem('list', JSON.stringify(listItems));
+    localStorageList = JSON.parse(localStorage.getItem('list'));
+    localRender();
+  });
 };
 
 const swapLocal = (firstId, secondId) => {
@@ -106,6 +123,7 @@ const swapLocal = (firstId, secondId) => {
   const secondObject = localStorageList.find(
     (ele) => ele.id === Number(secondId)
   );
+
 
   const tempIndex = firstObject.index;
 
@@ -121,19 +139,19 @@ const swapLocal = (firstId, secondId) => {
   listItems[tempIndex].completed = listItems[secondObject.index].completed;
   // listItems[firstId].index = listItems[secondId].index;
 
-  listItems[secondObject.index].id = tempId;
-  listItems[secondObject.index].description = tempDesc;
-  listItems[secondObject.index].completed = tempCompl;
-  // listItems[secondId].index = tempInd;
+  let tempdescription = JSON.parse(
+    JSON.stringify(listItems[firstId].description)
+  );
+  let tempcompleted = listItems[firstId].completed;
 
-  // debugger;
-  console.log(listItems);
+  listItems[firstId].description = listItems[secondId].description;
+  listItems[firstId].completed = listItems[secondId].completed;
+  console.log(listItems[firstId]);
+  listItems[secondId].description = tempdescription;
+  listItems[secondId].completed = tempcompleted;
 
   localStorage.setItem('list', JSON.stringify(listItems));
   localStorageList = JSON.parse(localStorage.getItem('list'));
-
-  firstObject.index = secondObject.index;
-  secondObject.index = tempIndex;
 
   if (localStorage.length > 0) {
     localRender();
@@ -142,24 +160,14 @@ const swapLocal = (firstId, secondId) => {
   }
 };
 const swap = (firstId, secondId) => {
-  // localStorageList = JSON.parse(localStorage.getItem('list'));
   const firstObject = listItems.find((ele) => ele.id === Number(firstId));
   const secondObject = listItems.find((ele) => ele.id === Number(secondId));
-  console.log(firstObject);
   const tempIndex = firstObject.index;
   firstObject.index = secondObject.index;
   secondObject.index = tempIndex;
-  if (localStorage.length > 0) {
-    localRender();
-  } else {
-    render();
-  }
+  localRender();
 };
 
-if (localStorage.length > 0) {
-  localRender();
-} else {
-  render();
-}
+localRender();
 
-export { listItems, swap, swapLocal, localStorageList };
+export { listItems, swap, swapLocal, localStorageList, inputBox };

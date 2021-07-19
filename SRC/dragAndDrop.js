@@ -8,6 +8,7 @@ export const addActionListner = () => {
       element.classList.add('ondrag');
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('id', element.id);
+      // console.log(e.dataTransfer.getData('id'));
     });
     element.addEventListener('drop', (e) => {
       e.preventDefault();
@@ -15,12 +16,9 @@ export const addActionListner = () => {
       const fristId = e.dataTransfer.getData('id');
       const secondId = element.id;
       localStorage.setItem('list', JSON.stringify(listItems));
-      // debugger;
       if (localStorage.length > 0) {
-        // debugger;
         swapLocal(fristId, secondId);
       } else {
-        // debugger;
         swap(fristId, secondId);
       }
       localStorage.setItem('list', JSON.stringify(listItems));
