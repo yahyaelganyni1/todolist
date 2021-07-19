@@ -1,3 +1,6 @@
+
+/* eslint-disable */
+
 import { addActionListner } from './dragAndDrop.js';
 import { List } from './addNewList';
 import { addCheck, addChecklocal } from './check.js';
@@ -121,10 +124,20 @@ const swapLocal = (firstId, secondId) => {
     (ele) => ele.id === Number(secondId)
   );
 
-  console.log(firstId);
-  console.log(secondId);
-  firstId = firstId - 1;
-  secondId = secondId - 1;
+
+  const tempIndex = firstObject.index;
+
+  console.log(listItems);
+
+  let tempId = listItems[tempIndex].id;
+  let tempDesc = listItems[tempIndex].description;
+  let tempCompl = listItems[tempIndex].completed;
+  // let tempInd = listItems[firstId].index;
+
+  listItems[tempIndex].id = listItems[secondObject.index].id;
+  listItems[tempIndex].description = listItems[secondObject.index].description;
+  listItems[tempIndex].completed = listItems[secondObject.index].completed;
+  // listItems[firstId].index = listItems[secondId].index;
 
   let tempdescription = JSON.parse(
     JSON.stringify(listItems[firstId].description)
