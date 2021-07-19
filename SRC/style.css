@@ -23,7 +23,7 @@
   padding: 0.4em;
 }
 
-.ibput-box {
+.input-box {
   padding: 1em;
   border: 1px solid rgba(0, 0, 0, 0.411);
   width: 50%;
@@ -47,16 +47,12 @@ ul li {
   padding: 0.5em;
 }
 
-ul li p {
-  padding: 0 9em 0 1em;
-}
-
 ul li i {
   color: rgb(80, 80, 80);
 }
 
 ul li i:hover {
-  cursor: all-scroll;
+  cursor: grab;
 }
 
 ul li input {
@@ -78,4 +74,12 @@ ul li div {
   width: 50%;
   cursor: pointer;
   transition: all 0.3s 0s ease-in-out;
+}
+
+.ondrag {
+  opacity: 0.5;
+}
+
+.checked {
+  text-decoration-line: line-through;
 }
