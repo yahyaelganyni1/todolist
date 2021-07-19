@@ -32,21 +32,7 @@ inputBox.addEventListener('keypress', (e) => {
     theListObject.renderListElemenet();
     localStorage.setItem('list', JSON.stringify(listItems));
     localStorageList = JSON.parse(localStorage.getItem('list'));
-    // addActionListner();
-    // icons = document.querySelectorAll('li i');
-    // // addCheck();
-    // icons.forEach((icon) => {
-    //   icon.addEventListener('click', (e) => {
-    //     listItems.splice(Array.prototype.indexOf.call(icons, e.target), 1);
-    //     console.log(listItems);
-    //     console.log(Array.prototype.indexOf.call(icons, e.target));
-    //     listItems.forEach((item, index) => item.index = index + 1);
-    //     localStorage.setItem('list', JSON.stringify(listItems));
-    //     localStorageList = JSON.parse(localStorage.getItem('list'));
-    //     e.stopImmediatePropagation();
-    //     // localRender();
-    //   });
-    // });
+
     localRender();
   }
 });
