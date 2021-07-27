@@ -28,8 +28,6 @@ const addCheck = () => {
       const arrObject = listItems.find(
         (ele) => ele.index === Number(element.id)
       );
-      console.log(arrObject);
-      console.log(listItems);
       arrObject.completed = !arrObject.completed;
       if (arrObject.completed) {
         element.classList.add('checked');

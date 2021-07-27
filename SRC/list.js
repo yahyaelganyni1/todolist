@@ -1,6 +1,6 @@
 import { addActionListner } from './dragAndDrop.js';
 import { List } from './addNewList';
-import { addCheck, addChecklocal } from './check.js';
+import { addCheck } from './check.js';
 const theList = document.querySelector('.the-list');
 const inputBox = document.querySelector('.input-box');
 let icons = document.querySelectorAll('li i');
@@ -15,16 +15,6 @@ if (localStorage.length < 1) {
   listItems = JSON.parse(localStorage.getItem('list'));
 }
 
-// clearBtn.addEventListener('click', (e) => {
-//   listItems = listItems.filter((item) => item.completed === false);
-//   console.log(listItems);
-//   listItems.forEach((item, index) => item.index = index + 1);
-//   localStorage.setItem('list', JSON.stringify(listItems));
-//   localStorageList = JSON.parse(localStorage.getItem('list'));
-//   localRender();
-// });
-
-// creat list element
 inputBox.addEventListener('keypress', (e) => {
   if (e.key === 'Enter' && inputBox.value.length > 0) {
     const theListObject = new List(inputBox.value, false, listItems.length + 1);
@@ -80,8 +70,6 @@ const localRender = () => {
   icons.forEach((icon) => {
     icon.addEventListener('click', (e) => {
       listItems.splice(Array.prototype.indexOf.call(icons, e.target), 1);
-      console.log(listItems);
-      console.log(Array.prototype.indexOf.call(icons, e.target));
       listItems.forEach((item, index) => (item.index = index + 1));
       localStorage.setItem('list', JSON.stringify(listItems));
       localStorageList = JSON.parse(localStorage.getItem('list'));
@@ -90,25 +78,14 @@ const localRender = () => {
   });
   clearBtn.addEventListener('click', (e) => {
     listItems = listItems.filter((item) => item.completed === false);
-    console.log(listItems);
     listItems.forEach((item, index) => (item.index = index + 1));
     localStorage.setItem('list', JSON.stringify(listItems));
     localStorageList = JSON.parse(localStorage.getItem('list'));
     localRender();
   });
 };
-
 const swapLocal = (firstId, secondId) => {
   localStorageList = JSON.parse(localStorage.getItem('list'));
-  const firstObject = localStorageList.find(
-    (ele) => ele.id === Number(firstId)
-  );
-  const secondObject = localStorageList.find(
-    (ele) => ele.id === Number(secondId)
-  );
-
-  console.log(firstId);
-  console.log(secondId);
   firstId = firstId - 1;
   secondId = secondId - 1;
 
@@ -119,7 +96,6 @@ const swapLocal = (firstId, secondId) => {
 
   listItems[firstId].description = listItems[secondId].description;
   listItems[firstId].completed = listItems[secondId].completed;
-  console.log(listItems[firstId]);
   listItems[secondId].description = tempdescription;
   listItems[secondId].completed = tempcompleted;
 
